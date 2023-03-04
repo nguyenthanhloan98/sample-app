@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_30_100433) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_22_155701) do
+  create_table "application_games", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.string "counter"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_application_games_on_user_id"
+  end
+
+  create_table "assets", force: :cascade do |t|
+    t.integer "product_id"
+    t.string "name"
+    t.string "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_assets_on_product_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.string "price"
@@ -25,4 +43,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_30_100433) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "application_games", "users"
+  add_foreign_key "assets", "products"
 end

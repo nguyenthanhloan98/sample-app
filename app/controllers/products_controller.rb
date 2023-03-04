@@ -6,6 +6,15 @@ class ProductsController < ApplicationController
     @products = Product.all
   end
 
+  def get_list_products
+    render json: Product.all
+  end
+
+  def create_new_product
+    @product = Product.create(product_params)
+    render :json => @product, status: :created, location: @product
+  end
+
   # GET /products/1 or /products/1.json
   def show
   end
@@ -21,6 +30,7 @@ class ProductsController < ApplicationController
 
   # POST /products or /products.json
   def create
+    binding.pry
     @product = Product.new(product_params)
 
     respond_to do |format|
